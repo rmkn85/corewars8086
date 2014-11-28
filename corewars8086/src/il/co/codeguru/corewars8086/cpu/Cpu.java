@@ -90,20 +90,28 @@ public class Cpu {
     private void opcode0X(byte opcode) throws CpuException, MemoryException {
         switch (opcode) {
             case (byte)0x00: // ADD [X], reg8
+            {
                 m_indirect.reset();
                 m_indirect.setMem8(add8(m_indirect.getMem8(), m_indirect.getReg8()));
+            }
                 break;
             case (byte)0x01: // ADD [X], reg16
+            {
                 m_indirect.reset();
                 m_indirect.setMem16(add16(m_indirect.getMem16(), m_indirect.getReg16()));
+            }
                 break;
             case (byte)0x02: // ADD reg8, [X]
+            {
                 m_indirect.reset();
                 m_indirect.setReg8(add8(m_indirect.getReg8(), m_indirect.getMem8()));
+            }
                 break;
             case (byte)0x03: // ADD reg16, [X]
+            {
                 m_indirect.reset();
                 m_indirect.setReg16(add16(m_indirect.getReg16(), m_indirect.getMem16()));
+            }
                 break;
             case (byte)0x04: // ADD AL, imm8
                 m_state.setAL(add8(m_state.getAL(), m_fetcher.nextByte()));
