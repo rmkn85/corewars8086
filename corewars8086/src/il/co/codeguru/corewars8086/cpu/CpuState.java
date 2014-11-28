@@ -1,319 +1,143 @@
 package il.co.codeguru.corewars8086.cpu;
 
-import il.co.codeguru.corewars8086.utils.Unsigned;
-
 /**
- * Wrapper class for CPU state (registers & flags). 
- * 
- * @author DL
+ * @author romi
+ * @since 2014-11-28
  */
-public class CpuState {
+public interface CpuState {
+    short getAX();
 
-    /** Accessors for the 16bit registers */
-    public short getAX() {
-        return m_ax;
-    }
-    public short getBX() {
-        return m_bx;
-    }
-    public short getCX() {
-        return m_cx;
-    }
-    public short getDX() {
-        return m_dx;
-    }
-    public short getDS() {
-        return m_ds;
-    }
-    public short getES() {
-        return m_es;
-    }
-    public short getSI() {
-        return m_si;
-    }
-    public short getDI() {
-        return m_di;
-    }
-    public short getSS() {
-        return m_ss;
-    }
-    public short getBP() {
-        return m_bp;
-    }
-    public short getSP() {
-        return m_sp;
-    }
-    public short getCS() {
-        return m_cs;
-    }
-    public short getIP() {
-        return m_ip;
-    }
-    public short getFlags() {
-        return m_flags;
-    }	
+    short getBX();
 
-    public void setAX(short value) {
-        m_ax = value;
-    }
-    public void setBX(short value) {
-        m_bx = value;
-    }
-    public void setCX(short value) {
-        m_cx = value;
-    }
-    public void setDX(short value) {
-        m_dx = value;
-    }
-    public void setDS(short value) {
-        m_ds = value;
-    }
-    public void setES(short value) {
-        m_es = value;
-    }
-    public void setSI(short value) {
-        m_si = value;
-    }
-    public void setDI(short value) {
-        m_di = value;
-    }
-    public void setSS(short value) {
-        m_ss = value;
-    }
-    public void setBP(short value) {
-        m_bp = value;
-    }
-    public void setSP(short value) {
-        m_sp = value;
-    }
-    public void setCS(short value) {
-        m_cs = value;
-    }
-    public void setIP(short value) {
-        m_ip = value;
-    }
-    public void setFlags(short value) {
-        m_flags = value;
-    }
+    short getCX();
 
-    /** Accessors for the 8bit registers */
-    public byte getAL() {
-        return (byte)m_ax;
-    }	
-    public byte getBL() {
-        return (byte)m_bx;
-    }	
-    public byte getCL() {
-        return (byte)m_cx;
-    }	
-    public byte getDL() {
-        return (byte)m_dx;
-    }	
-    public byte getAH() {
-        return (byte)(m_ax >> 8);
-    }	
-    public byte getBH() {
-        return (byte)(m_bx >> 8);
-    }	
-    public byte getCH() {
-        return (byte)(m_cx >> 8);
-    }	
-    public byte getDH() {
-        return (byte)(m_dx >> 8);
-    }	
+    short getDX();
 
-    public void setAL(byte value) {
-        m_ax &= 0xFF00;
-        m_ax |= Unsigned.unsignedByte(value);
-    }
-    public void setBL(byte value) {
-        m_bx &= 0xFF00;
-        m_bx |= Unsigned.unsignedByte(value);
-    }
-    public void setCL(byte value) {
-        m_cx &= 0xFF00;
-        m_cx |= Unsigned.unsignedByte(value);
-    }
-    public void setDL(byte value) {
-        m_dx &= 0xFF00;
-        m_dx |= Unsigned.unsignedByte(value);
-    }
-    public void setAH(byte value) {
-        m_ax &= 0x00FF;
-        m_ax |= (Unsigned.unsignedByte(value) << 8);
-    }
-    public void setBH(byte value) {
-        m_bx &= 0x00FF;
-        m_bx |= (Unsigned.unsignedByte(value) << 8);
-    }
-    public void setCH(byte value) {
-        m_cx &= 0x00FF;
-        m_cx |= (Unsigned.unsignedByte(value) << 8);
-    }
-    public void setDH(byte value) {
-        m_dx &= 0x00FF;
-        m_dx |= (Unsigned.unsignedByte(value) << 8);
-    }
+    short getDS();
 
-    /** Accessors for the virtual Energy register. */
-    public short getEnergy() {
-        return m_energy;
-    }
-    public void setEnergy(short value) {
-        m_energy = value;
-    }
+    short getES();
 
-    /** Accessors for the virtual bomb count registers. */
-    public byte getBomb1Count() {
-        return m_bomb1count;
-    }
-    public void setBomb1Count(byte value) {
-        m_bomb1count = value;
-    }
-    public byte getBomb2Count() {
-        return m_bomb2count;
-    }
-    public void setBomb2Count(byte value) {
-        m_bomb2count = value;
-    }
+    short getSI();
 
-    /**
-     * 'get' accessor methods for the various fields of the flags register.
-     * @return whether or not the requested flags field is set.
-     */
-    public boolean getCarryFlag() {
-        return ((m_flags & FLAGS_MASK_CARRY) == FLAGS_MASK_CARRY);
-    }
-    public boolean getParityFlag() {
-        return ((m_flags & FLAGS_MASK_PARITY) == FLAGS_MASK_PARITY);
-    }
-    public boolean getAuxFlag() {
-        return ((m_flags & FLAGS_MASK_AUX) == FLAGS_MASK_AUX);
-    }
-    public boolean getZeroFlag() {
-        return ((m_flags & FLAGS_MASK_ZERO) == FLAGS_MASK_ZERO);
-    }
-    public boolean getSignFlag() {
-        return ((m_flags & FLAGS_MASK_SIGN) == FLAGS_MASK_SIGN);
-    }
-    public boolean getTrapFlag() {
-        return ((m_flags & FLAGS_MASK_TRAP) == FLAGS_MASK_TRAP);
-    }
-    public boolean getInterruptFlag() {
-        return ((m_flags & FLAGS_MASK_INTERRUPT) == FLAGS_MASK_INTERRUPT);
-    }
-    public boolean getDirectionFlag() {
-        return ((m_flags & FLAGS_MASK_DIRECTION) == FLAGS_MASK_DIRECTION);
-    }
-    public boolean getOverflowFlag() {
-        return ((m_flags & FLAGS_MASK_OVERFLOW) == FLAGS_MASK_OVERFLOW);
-    }
+    short getDI();
 
-    /**
-     * 'set' accessor methods for the various fields of the flags register.
-     * @param newValue whether or not the requested flags field should be set.
-     */
-    public void setCarryFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_CARRY;
-        } else {
-            m_flags &= (~FLAGS_MASK_CARRY);
-        }
-    }
-    public void setParityFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_PARITY;
-        } else {
-            m_flags &= (~FLAGS_MASK_PARITY);
-        }
-    }
-    public void setAuxFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_AUX;
-        } else {
-            m_flags &= (~FLAGS_MASK_AUX);
-        }
-    }
-    public void setZeroFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_ZERO;
-        } else {
-            m_flags &= (~FLAGS_MASK_ZERO);
-        }
-    }
-    public void setSignFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_SIGN;
-        } else {
-            m_flags &= (~FLAGS_MASK_SIGN);
-        }
-    }
-    public void setTrapFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_TRAP;
-        } else {
-            m_flags &= (~FLAGS_MASK_TRAP);
-        }
-    }
-    public void setInterruptFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_INTERRUPT;
-        } else {
-            m_flags &= (~FLAGS_MASK_INTERRUPT);
-        }
-    }
-    public void setDirectionFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_DIRECTION;
-        } else {
-            m_flags &= (~FLAGS_MASK_DIRECTION);
-        }
-    }
-    public void setOverflowFlag(boolean newValue) {
-        if (newValue) {
-            m_flags |= FLAGS_MASK_OVERFLOW;
-        } else {
-            m_flags &= (~FLAGS_MASK_OVERFLOW);
-        }
-    }
+    short getSS();
 
-    /** CPU registers */
-    private short m_ax;
-    private short m_bx;
-    private short m_cx;
-    private short m_dx;
+    short getBP();
 
-    private short m_ds;
-    private short m_es;
-    private short m_si;
-    private short m_di;
+    short getSP();
 
-    private short m_ss;
-    private short m_bp;
-    private short m_sp;
+    short getCS();
 
-    private short m_cs;
-    private short m_ip;
-    private short m_flags;
+    short getIP();
 
-    /** The virtual Energy register (used to calculate the warrior's speed). */
-    private short m_energy;
+    short getFlags();
 
-    /** The virtual bomb count registers (used for INT 0x86, INT 0x87 opcodes). */
-    private byte m_bomb1count;
-    private byte m_bomb2count;
+    void setAX(short value);
 
+    void setBX(short value);
 
-    /**
-     * Masks for the various 'flags' fields.
-     */
-    private static final short FLAGS_MASK_CARRY = 0x0001;
-    private static final short FLAGS_MASK_PARITY = 0x0004;
-    private static final short FLAGS_MASK_AUX = 0x0010;
-    private static final short FLAGS_MASK_ZERO = 0x0040;
-    private static final short FLAGS_MASK_SIGN = 0x0080;
-    private static final short FLAGS_MASK_TRAP = 0x0100;
-    private static final short FLAGS_MASK_INTERRUPT = 0x0200;
-    private static final short FLAGS_MASK_DIRECTION = 0x0400;
-    private static final short FLAGS_MASK_OVERFLOW = 0x0800;	
+    void setCX(short value);
+
+    void setDX(short value);
+
+    void setDS(short value);
+
+    void setES(short value);
+
+    void setSI(short value);
+
+    void setDI(short value);
+
+    void setSS(short value);
+
+    void setBP(short value);
+
+    void setSP(short value);
+
+    void setCS(short value);
+
+    void setIP(short value);
+
+    void setFlags(short value);
+
+    byte getAL();
+
+    byte getBL();
+
+    byte getCL();
+
+    byte getDL();
+
+    byte getAH();
+
+    byte getBH();
+
+    byte getCH();
+
+    byte getDH();
+
+    void setAL(byte value);
+
+    void setBL(byte value);
+
+    void setCL(byte value);
+
+    void setDL(byte value);
+
+    void setAH(byte value);
+
+    void setBH(byte value);
+
+    void setCH(byte value);
+
+    void setDH(byte value);
+
+    short getEnergy();
+
+    void setEnergy(short value);
+
+    byte getBomb1Count();
+
+    void setBomb1Count(byte value);
+
+    byte getBomb2Count();
+
+    void setBomb2Count(byte value);
+
+    boolean getCarryFlag();
+
+    boolean getParityFlag();
+
+    boolean getAuxFlag();
+
+    boolean getZeroFlag();
+
+    boolean getSignFlag();
+
+    boolean getTrapFlag();
+
+    boolean getInterruptFlag();
+
+    boolean getDirectionFlag();
+
+    boolean getOverflowFlag();
+
+    void setCarryFlag(boolean newValue);
+
+    void setParityFlag(boolean newValue);
+
+    void setAuxFlag(boolean newValue);
+
+    void setZeroFlag(boolean newValue);
+
+    void setSignFlag(boolean newValue);
+
+    void setTrapFlag(boolean newValue);
+
+    void setInterruptFlag(boolean newValue);
+
+    void setDirectionFlag(boolean newValue);
+
+    void setOverflowFlag(boolean newValue);
 }

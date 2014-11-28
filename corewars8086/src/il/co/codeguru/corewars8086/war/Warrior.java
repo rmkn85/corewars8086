@@ -3,6 +3,7 @@ package il.co.codeguru.corewars8086.war;
 import il.co.codeguru.corewars8086.cpu.Cpu;
 import il.co.codeguru.corewars8086.cpu.CpuException;
 import il.co.codeguru.corewars8086.cpu.CpuState;
+import il.co.codeguru.corewars8086.cpu.CpuStateImpl;
 import il.co.codeguru.corewars8086.memory.MemoryException;
 import il.co.codeguru.corewars8086.memory.RealModeAddress;
 import il.co.codeguru.corewars8086.memory.RealModeMemory;
@@ -41,7 +42,7 @@ public class Warrior {
         m_codeSize = codeSize;
         m_loadAddress = loadAddress;
 
-        m_state = new CpuState();
+        m_state = new CpuStateImpl();
         initializeCpuState(loadAddress, initialStack, groupSharedMemory);
 
         // initialize read-access regions
