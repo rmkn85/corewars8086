@@ -92,84 +92,122 @@ public class Cpu {
             case (byte)0x00: // ADD [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(add8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                byte value = add8(mem8, reg8);
+                m_indirect.setMem8(value);
             }
                 break;
             case (byte)0x01: // ADD [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(add16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = add16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x02: // ADD reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(add8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = add8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x03: // ADD reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(add16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = add16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x04: // ADD AL, imm8
             {
-                m_state.setAL(add8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = add8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x05: // ADD AX, imm16
             {
-                m_state.setAX(add16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = add16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;
             case (byte)0x06: // PUSH ES
             {
-                push(m_state.getES());
+                short value = m_state.getES();
+                push(value);
             }
                 break;
             case (byte)0x07: // POP ES
             {
-                m_state.setES(pop());
+                short value = pop();
+                m_state.setES(value);
             }
                 break;				
             case (byte)0x08: // OR [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(or8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                m_indirect.setMem8(or8(mem8, reg8));
             }
                 break;				
             case (byte)0x09: // OR [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(or16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = or16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x0A: // OR reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(or8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = or8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x0B: // OR reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(or16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = or16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x0C: // OR AL, imm8
             {
-                m_state.setAL(or8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = or8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x0D: // OR AX, imm16
             {
-                m_state.setAX(or16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = or16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;				
             case (byte)0x0E: // PUSH CS
             {
-                push(m_state.getCS());
+                short cs = m_state.getCS();
+                push(cs);
             }
                 break;
             case (byte)0x0F:
@@ -185,89 +223,129 @@ public class Cpu {
             case (byte)0x10: // ADC [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(adc8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                byte value = adc8(mem8, reg8);
+                m_indirect.setMem8(value);
             }
                 break;
             case (byte)0x11: // ADC [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(adc16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = adc16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x12: // ADC reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(adc8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = adc8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x13: // ADC reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(adc16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = adc16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x14: // ADC AL, imm8
             {
-                m_state.setAL(adc8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = adc8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x15: // ADC AX, imm16
             {
-                m_state.setAX(adc16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = adc16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;			
             case (byte)0x16: // PUSH SS
             {
-                push(m_state.getSS());
+                short ss = m_state.getSS();
+                push(ss);
             }
                 break;
             case (byte)0x17: // POP SS
             {
-                m_state.setSS(pop());
+                short value = pop();
+                m_state.setSS(value);
             }
                 break;
             case (byte)0x18: // SBB [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(sbb8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                byte value = sbb8(mem8, reg8);
+                m_indirect.setMem8(value);
             }
                 break;
             case (byte)0x19: // SBB [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(sbb16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = sbb16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x1A: // SBB reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(sbb8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = sbb8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x1B: // SBB reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(sbb16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = sbb16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x1C: // SBB AL, imm8
             {
-                m_state.setAL(sbb8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = sbb8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x1D: // SBB AX, imm16
             {
-                m_state.setAX(sbb16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = sbb16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;				
             case (byte)0x1E: // PUSH DS
             {
-                push(m_state.getDS());
+                short ds = m_state.getDS();
+                push(ds);
             }
                 break;
             case (byte)0x1F: // POP DS
             {
-                m_state.setDS(pop());
+                short value = pop();
+                m_state.setDS(value);
             }
                 break;
             default:
@@ -280,35 +358,53 @@ public class Cpu {
             case (byte)0x20: // AND [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(and8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                byte value = and8(mem8, reg8);
+                m_indirect.setMem8(value);
             }
                 break;
             case (byte)0x21: // AND [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(and16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = and16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x22: // AND reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(and8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = and8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x23: // AND reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(and16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = and16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x24: // AND AL, imm8
             {
-                m_state.setAL(and8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = and8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x25: // AND AX, imm16
             {
-                m_state.setAX(and16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = and16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;			
             case (byte)0x26: // TODO: 'ES:' prefix
@@ -317,35 +413,53 @@ public class Cpu {
             case (byte)0x28: // SUB [X], reg8
             {
                 m_indirect.reset();
-                m_indirect.setMem8(sub8(m_indirect.getMem8(), m_indirect.getReg8()));
+                byte mem8 = m_indirect.getMem8();
+                byte reg8 = m_indirect.getReg8();
+                byte value = sub8(mem8, reg8);
+                m_indirect.setMem8(value);
             }
                 break;
             case (byte)0x29: // SUB [X], reg16
             {
                 m_indirect.reset();
-                m_indirect.setMem16(sub16(m_indirect.getMem16(), m_indirect.getReg16()));
+                short mem16 = m_indirect.getMem16();
+                short reg16 = m_indirect.getReg16();
+                short value = sub16(mem16, reg16);
+                m_indirect.setMem16(value);
             }
                 break;
             case (byte)0x2A: // SUB reg8, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg8(sub8(m_indirect.getReg8(), m_indirect.getMem8()));
+                byte reg8 = m_indirect.getReg8();
+                byte mem8 = m_indirect.getMem8();
+                byte value = sub8(reg8, mem8);
+                m_indirect.setReg8(value);
             }
                 break;
             case (byte)0x2B: // SUB reg16, [X]
             {
                 m_indirect.reset();
-                m_indirect.setReg16(sub16(m_indirect.getReg16(), m_indirect.getMem16()));
+                short reg16 = m_indirect.getReg16();
+                short mem16 = m_indirect.getMem16();
+                short value = sub16(reg16, mem16);
+                m_indirect.setReg16(value);
             }
                 break;
             case (byte)0x2C: // SUB AL, imm8
             {
-                m_state.setAL(sub8(m_state.getAL(), m_fetcher.nextByte()));
+                byte al = m_state.getAL();
+                byte nextByte = m_fetcher.nextByte();
+                byte value = sub8(al, nextByte);
+                m_state.setAL(value);
             }
                 break;
             case (byte)0x2D: // SUB AX, imm16
             {
-                m_state.setAX(sub16(m_state.getAX(), m_fetcher.nextWord()));
+                short ax = m_state.getAX();
+                short nextWord = m_fetcher.nextWord();
+                short value = sub16(ax, nextWord);
+                m_state.setAX(value);
             }
                 break;	
             case (byte)0x2E: // TODO: 'CS:' prefix
@@ -602,6 +716,7 @@ public class Cpu {
         switch (opcode) {
             case (byte)0x80: // <?> byte ptr [X], imm8
             case (byte)0x82: // TODO: opcode 0x82 is identical to opcode 0x80 ?
+            {
                 m_indirect.reset();
                 switch (m_indirect.getRegIndex()) {
                     case 0: // ADD
@@ -609,53 +724,55 @@ public class Cpu {
                         m_indirect.setMem8(
                                 add8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 1: // OR
                     {
                         m_indirect.setMem8(
                                 or8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 2: // ADC
                     {
                         m_indirect.setMem8(
                                 adc8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 3: // SBB
                     {
                         m_indirect.setMem8(
                                 sbb8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 4: // AND
                     {
                         m_indirect.setMem8(
                                 and8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 5: // SUB
                     {
                         m_indirect.setMem8(
                                 sub8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 6: // XOR
                     {
                         m_indirect.setMem8(
                                 xor8(m_indirect.getMem8(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 7: // CMP
                     {
                         sub8(m_indirect.getMem8(), m_fetcher.nextByte());
                     }
-                        break;
+                    break;
                     default:
                         throw new RuntimeException();
                 }
+            }
                 break;
             case (byte)0x81: // <?> word ptr [X], imm16
+            {
                 m_indirect.reset();
                 switch (m_indirect.getRegIndex()) {
                     case 0: // ADD
@@ -663,53 +780,55 @@ public class Cpu {
                         m_indirect.setMem16(
                                 add16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 1: // OR
                     {
                         m_indirect.setMem16(
                                 or16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 2: // ADC
                     {
                         m_indirect.setMem16(
                                 adc16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 3: // SBB
                     {
                         m_indirect.setMem16(
                                 sbb16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 4: // AND
                     {
                         m_indirect.setMem16(
                                 and16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 5: // SUB
                     {
                         m_indirect.setMem16(
                                 sub16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 6: // XOR
                     {
                         m_indirect.setMem16(
                                 xor16(m_indirect.getMem16(), m_fetcher.nextWord()));
                     }
-                        break;
+                    break;
                     case 7: // CMP
                     {
                         sub16(m_indirect.getMem16(), m_fetcher.nextWord());
                     }
-                        break;
+                    break;
                     default:
                         throw new RuntimeException();
                 }
+            }
                 break;
             case (byte)0x83: // <?> word ptr [X], sign-extended imm8
+            {
                 m_indirect.reset();
                 switch (m_indirect.getRegIndex()) {
                     case 0: // ADD
@@ -717,51 +836,52 @@ public class Cpu {
                         m_indirect.setMem16(
                                 add16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 1: // OR
                     {
                         m_indirect.setMem16(
                                 or16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 2: // ADC
                     {
                         m_indirect.setMem16(
                                 adc16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 3: // SBB
                     {
                         m_indirect.setMem16(
                                 sbb16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 4: // AND
                     {
                         m_indirect.setMem16(
                                 and16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 5: // SUB
                     {
                         m_indirect.setMem16(
                                 sub16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 6: // XOR
                     {
                         m_indirect.setMem16(
                                 xor16(m_indirect.getMem16(), m_fetcher.nextByte()));
                     }
-                        break;
+                    break;
                     case 7: // CMP
                     {
                         sub16(m_indirect.getMem16(), m_fetcher.nextByte());
                     }
-                        break;
+                    break;
                     default:
                         throw new RuntimeException();
                 }
+            }
                 break;
             case (byte)0x84: // TEST reg8, [X]
             {
