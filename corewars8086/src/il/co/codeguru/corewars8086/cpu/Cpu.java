@@ -1,5 +1,6 @@
 package il.co.codeguru.corewars8086.cpu;
 
+import il.co.codeguru.corewars8086.cpu.exceptions.*;
 import il.co.codeguru.corewars8086.memory.MemoryException;
 import il.co.codeguru.corewars8086.memory.RealModeAddress;
 import il.co.codeguru.corewars8086.memory.RealModeMemory;
@@ -30,7 +31,7 @@ public class Cpu {
     /**
      * Performs the next single opcode.
      * 
-     * @throws CpuException    on any CPU error. 
+     * @throws il.co.codeguru.corewars8086.cpu.exceptions.CpuException    on any CPU error.
      * @throws MemoryException on any Memory error. 
      */
     public void nextOpcode() throws CpuException, MemoryException {

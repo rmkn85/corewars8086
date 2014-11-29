@@ -1,6 +1,6 @@
 package il.co.codeguru.corewars8086.war;
 
-import il.co.codeguru.corewars8086.cpu.CpuException;
+import il.co.codeguru.corewars8086.cpu.exceptions.CpuException;
 import il.co.codeguru.corewars8086.memory.MemoryEventListener;
 import il.co.codeguru.corewars8086.memory.MemoryException;
 import il.co.codeguru.corewars8086.memory.RealModeAddress;
